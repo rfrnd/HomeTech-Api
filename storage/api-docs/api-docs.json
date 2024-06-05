@@ -1,0 +1,253 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "HomeTech API",
+        "description": "Laravel project to practice developing Electronic API with L5 Swagger OpenApi",
+        "contact": {
+            "name": "Rafael",
+            "email": "rafael.422023026@civitas.ukrida.ac.id"
+        },
+        "version": "1.0",
+        "x-logo": {
+            "url": "https://drive.google.com/file/d/1WcMmeLTgc8cvn_6aH0uy-le3KkFFjQkN/view?usp=sharing"
+        }
+    },
+    "paths": {
+        "/api/Technology": {
+            "get": {
+                "tags": [
+                    "HomeTech"
+                ],
+                "summary": "Display a listing of items",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "HomeTech"
+                ],
+                "summary": "Store a newly created item",
+                "operationId": "store",
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tech"
+                            },
+                            "example": {
+                                "title": "Mesin Cuci LG Front Loading 8kg, Inverter Direct Drive™ dengan Smart Diagnosis™",
+                                "cover": "https://www.lg.com/content/dam/channel/wcms/id/images/mesin-cuci/fm1208n3w_abwpein_eain_id_c/FM1208N3W_Mesin_Cuci_Front_Loading_thumbnail_450.jpg",
+                                "price": 4449000,
+                                "description": "Pencucian optimal untuk kain dengan 6 Motion DD (Pilih program mencuci, dan teknologi 6 Motion Direct Drive akan menggerakkan tabung cuci ke beberapa arah, membersihkan kain dan menjadikan pakaian super bersih.)",
+                                "category": "Mesin Cuci",
+                                "brand": "LG",
+                                "model": "FM1208N3W"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Technology/{id}": {
+            "get": {
+                "tags": [
+                    "HomeTech"
+                ],
+                "summary": "Display the specified item",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of item that needs to be displayed",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "HomeTech"
+                ],
+                "summary": "Update the specified item",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID item that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tech"
+                            },
+                            "example": {
+                                "title": "Mesin Cuci LG Front Loading 8kg, Inverter Direct Drive™ dengan Smart Diagnosis™",
+                                "cover": "https://www.lg.com/content/dam/channel/wcms/id/images/mesin-cuci/fm1208n3w_abwpein_eain_id_c/FM1208N3W_Mesin_Cuci_Front_Loading_thumbnail_450.jpg",
+                                "price": 4449000,
+                                "description": "Pencucian optimal untuk kain dengan 6 Motion DD (Pilih program mencuci, dan teknologi 6 Motion Direct Drive akan menggerakkan tabung cuci ke beberapa arah, membersihkan kain dan menjadikan pakaian super bersih.)",
+                                "category": "Mesin Cuci",
+                                "brand": "LG",
+                                "model": "FM1208N3W"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "HomeTech"
+                ],
+                "summary": "Remove the specified item",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID item that needs to be removed",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "item not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tech": {
+                "title": "Tech model",
+                "description": "Tech model",
+                "required": [
+                    "nama",
+                    "Brand"
+                ],
+                "xml": {
+                    "name": "Tech"
+                }
+            }
+        }
+    }
+}

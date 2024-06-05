@@ -6,7 +6,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
+use OpenApi\Annotations as OA;
 
+
+/**
+ * class Tech.  
+ * 
+ * @author Rafael <rafael.422023026@civitas.ukrida.ac.id>
+ * 
+ * @OA\Schema(
+ *     description="Tech model",
+ *     title="Tech model",
+ *     required={"nama", "Brand"},
+ *     @OA\Xml(
+ *         name="Tech"
+ *      )
+ * )
+ */
 class Tech extends Model
 {
     // use HasFactory;
