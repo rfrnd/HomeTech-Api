@@ -13,7 +13,137 @@
         }
     },
     "paths": {
-        "/api/Technology": {
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Register new user & get token",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "example": {
+                                "name": "elfara",
+                                "email": "elfara@gmail.com",
+                                "password": "1q2w3e4r5t6y",
+                                "password_confirmation": "1q2w3e4r5t6y"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "log in to existing user & get token",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Request body description",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "example": {
+                                "email": "elfara@gmail.com",
+                                "password": "1q2w3e4r5t6y"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/logout": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "log out & destroy self token",
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User Email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/tech": {
             "get": {
                 "tags": [
                     "HomeTech"
@@ -74,10 +204,16 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
             }
         },
-        "/api/Technology/{id}": {
+        "/api/tech/{id}": {
             "get": {
                 "tags": [
                     "HomeTech"
@@ -186,7 +322,13 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -231,7 +373,13 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "passport_token_ready": [],
+                        "passport": []
+                    }
+                ]
             }
         }
     },
@@ -246,6 +394,36 @@
                 ],
                 "xml": {
                     "name": "Tech"
+                }
+            },
+            "User": {
+                "title": "User model",
+                "description": "User model",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        },
+        "securitySchemes": {
+            "passport_token_ready": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Enter token in format without \"Bearer \"",
+                "name": "Authorization",
+                "in": "header"
+            },
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "https",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
                 }
             }
         }

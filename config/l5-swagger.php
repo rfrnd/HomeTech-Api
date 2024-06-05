@@ -198,6 +198,29 @@ return [
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 */
+
+                'passport_token_ready' => [
+                    'type'          => 'http',
+                    'scheme'        => 'bearer',
+                    'description'   => 'Enter token in format without "Bearer "',
+                    'name'          => 'Authorization',
+                    'in'            => 'header',
+                ],
+                'passport' => [
+                    'type' => 'oauth2',
+                    'description' => 'Laravel passport oauth2 security.',
+                    'in' => 'https',
+                    'scheme' => 'https',
+                    'flows' => [
+                        "password" => [
+                            "authorizationUrl" => config('app.url') . '/oauth/authorize',
+                            "tokenUrl" => config('app.url') . '/oauth/token',
+                            "refreshUrl" => config('app.url') . '/token/refresh',
+                            "scopes" => []
+                        ],
+                    ],
+                ],
+                
             ],
             'security' => [
                 /*

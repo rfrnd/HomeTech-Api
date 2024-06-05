@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use OpenApi\Annotations as OA;
 
-
 /**
  * class Tech.  
  * 

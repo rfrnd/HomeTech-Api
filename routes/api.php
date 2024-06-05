@@ -2,10 +2,29 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TechController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::prefix('user')->group(function (){
+    Route::get('/users', function () {
+        return $request->user();
+    });
+    Route::post('/register', [AuthController::class, 'register']);   
+    Route::get('/login', [AuthController::class, 'login'])->name('login');   
+    Route::post('/login', [AuthController::class, 'login']);   
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');   
+});
 
-Route::apiResource('Technology', TechController::class);
+Route::apiResource('tech', TechController::class, [
+    'only' => [
+        'index',
+        'show'
+    ]
+]);
+
+Route::apiResource('tech', TechController::class, [
+    'except' => [
+        'index',
+        'show'
+    ]
+])->middleware(['auth:api']);

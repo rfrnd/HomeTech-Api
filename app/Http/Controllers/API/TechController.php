@@ -18,7 +18,7 @@ class TechController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/api/Technology",
+     *      path="/api/tech",
      *      tags={"HomeTech"},
      *      summary="Display a listing of items",
      *      operationId="index",
@@ -36,7 +36,7 @@ class TechController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/Technology",
+     *      path="/api/tech",
      *      tags={"HomeTech"},
      *      summary="Store a newly created item",
      *      operationId="store",
@@ -64,7 +64,8 @@ class TechController extends Controller
      *                  "brand": "LG", 
      *                  "model": "FM1208N3W"}
      *          ),
-     *      )
+     *      ),
+     *      security={{"passport_token_ready":{}, "passport":{}}}
      * )
      */
     public function store(Request $request)
@@ -88,7 +89,7 @@ class TechController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/Technology/{id}",
+     *      path="/api/tech/{id}",
      *      tags={"HomeTech"},
      *      summary="Display the specified item",
      *      operationId="show",
@@ -130,7 +131,7 @@ class TechController extends Controller
 
     /** 
      * @OA\Put(
-     *      path="/api/Technology/{id}",
+     *      path="/api/tech/{id}",
      *      tags={"HomeTech"},
      *      summary="Update the specified item",
      *      operationId="update",
@@ -173,7 +174,8 @@ class TechController extends Controller
      *                  "brand": "LG", 
      *                  "model": "FM1208N3W"}                     
      *          ),
-     *      )
+     *      ),
+     *      security={{"passport_token_ready":{}, "passport":{}}}
      * )
      */
     public function update(Request $request, $id)
@@ -200,7 +202,7 @@ class TechController extends Controller
     }
     /**
      * @OA\Delete(
-     *     path="/api/Technology/{id}",
+     *     path="/api/tech/{id}",
      *     tags={"HomeTech"},
      *     summary="Remove the specified item",
      *     operationId="destroy",
@@ -229,7 +231,8 @@ class TechController extends Controller
      *              format="int64"
      *          )
      *      ),
-     *   )
+     *      security={{"passport_token_ready":{}, "passport":{}}}
+     * )
      */
     public function destroy($id)
     {
