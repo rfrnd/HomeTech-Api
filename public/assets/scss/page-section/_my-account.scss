@@ -1,0 +1,135 @@
+/*====================
+    5.5 My Account Page CSS
+====================*/
+.myaccount-tab-menu {
+    flex-direction: column;
+    & a {
+        border: 1px solid #ddd;
+        border-bottom: none;
+        color: #222;
+        font-weight: 500;
+        display: block;
+        padding: 10px 15px;
+        text-transform: uppercase;
+
+        &:last-child {
+            border-bottom: 1px solid #ddd;
+        }
+        &:hover, &.active{
+            background-color: $theme-color--default;
+            border-color: $theme-color--default;
+            color: $white;
+        }
+        & i{
+            text-align: center;
+            width: 25px;
+        }
+    }
+    
+}
+@media #{$large-mobile}{
+	#myaccountContent {
+		margin-top: 30px;
+	}
+}
+.myaccount-content {
+	border: 1px solid #ddd;
+    padding: 30px;
+    @media #{$small-mobile}{
+        padding: 20px 15px;
+    }
+    & form {
+        margin-top: -20px;
+        & .single-input-item {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            & input {
+                width: 100%;
+                padding: 12px 10px;
+                border: 1px solid #ddd;
+                font-size: 14px;
+                &:focus {
+                    border: 1px solid $theme-color--default;
+                }
+            }
+
+            & .required {
+                font-weight: 500;
+            }
+        }
+        & .single-item-button{
+            width: 25%;
+            @media #{$desktop-device}{
+                width: 30%;
+            }
+            @media #{$tablet-device}{
+                width: 45%;
+            }
+            @media #{$large-mobile}{
+                width: 100%;
+            }
+        }
+    }
+    & .title {
+        font-size: 24px;
+        color: #222;
+        border-bottom: 1px dashed #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        @media #{$tablet-device, $large-mobile}{
+            font-size: 20px;
+        }
+    }
+    & .welcome{
+        & a{
+            color: #222;
+            &:hover {
+                color: $theme-color--default;
+            }
+        }
+        & strong {
+            font-weight: 600;
+            color: $theme-color--default;
+        }
+    }
+    & fieldset {
+        margin-top: 20px;
+        & legend {
+            color: #222;
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: 500;
+            border-bottom: 1px dashed #ddd;
+        }
+    }
+}
+.myaccount-table {
+	white-space: nowrap;
+    font-size: 14px;
+    & table, & .table{
+        & th{
+            color: #222;
+            padding: 10px;
+            font-weight: 500;
+            background-color: #f8f8f8;
+            border-color: #ddd;
+            border-bottom: 0;
+        }
+        & td {
+            padding: 10px;
+            vertical-align: middle;
+            border-color: #ddd;
+        }
+    }
+}
+.saved-message {
+	background-color: #ddd;
+	border-top: 3px solid $theme-color--default;
+	border-radius: 5px 5px 0 0;
+	font-weight: 600;
+	font-size: 15px;
+	color: #666666;
+	padding: 20px;
+}

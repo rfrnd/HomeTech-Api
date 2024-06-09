@@ -150,6 +150,58 @@
                 ],
                 "summary": "Display a listing of items",
                 "operationId": "index",
+                "parameters": [
+                    {
+                        "name": "_page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "_limit",
+                        "in": "query",
+                        "description": "max item in a page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "_search",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_publisher",
+                        "in": "query",
+                        "description": "search by publisher like name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "_sort_by",
+                        "in": "query",
+                        "description": "word to search",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "latest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
