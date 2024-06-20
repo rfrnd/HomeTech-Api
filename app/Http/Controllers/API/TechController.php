@@ -59,9 +59,9 @@ class TechController extends Controller
      *        )
      *     ),
      * @OA\Parameter(
-     *      name="_publisher",
+     *      name="_brand",
      *      in="query",
-     *      description="search by publisher like name",
+     *      description="search by brand like name",
      *      required=false,
      *      @OA\Schema(
      *         type="string",
@@ -74,7 +74,7 @@ class TechController extends Controller
      *      required=false,
      *      @OA\Schema(
      *         type="string",
-     *         example="latest" 
+     *         example="title_asc" 
      *        )
      *     ),
      * )
@@ -89,11 +89,11 @@ class TechController extends Controller
             $data['products']   = Tech::whereRaw('1 = 1');
         
             if ($request->get('_search')) {
-                $data['products'] = $data['products']->whereRaw('(LOWER(title) LIKE "%'.strtolower($request->get('_search')).'%" OR LOWER(author) LIKE "%'.strtolower($request->get('_search')).'%")');
+                $data['products'] = $data['products']->whereRaw('(LOWER(title) LIKE "%'.strtolower($request->get('_search')).'%" OR LOWER(brand) LIKE "%'.strtolower($request->get('_search')).'%")');
             }
         
-            if ($request->get('_publisher')) {
-                $data['products'] = $data['products']->whereRaw('LOWER(publisher) = "'.strtolower($request->get('_publisher')).'"');
+            if ($request->get('_brand')) {
+                $data['products'] = $data['products']->whereRaw('LOWER(brand) = "'.strtolower($request->get('_brand')).'"');
             }
             if ($request->get('_sort_by')) {
                 switch ($request->get('_sort_by')) {
@@ -154,7 +154,7 @@ class TechController extends Controller
      *              ref="#/components/schemas/Tech",
      *              example={ 
      *                  "title": "Mesin Cuci LG Front Loading 8kg, Inverter Direct Drive™ dengan Smart Diagnosis™", 
-     *                  "cover": "https://www.lg.com/content/dam/channel/wcms/id/images/mesin-cuci/fm1208n3w_abwpein_eain_id_c/FM1208N3W_Mesin_Cuci_Front_Loading_thumbnail_450.jpg", 
+     *                  "cover": "https://www.lg.com/content/dam/channel/wcms/id/images/mesin-cuci/fm1208n3w_abwpein_eain_id_c/FM1208N3W_Mesin_Cuci_Front_Loading_thumbnail_450.jpg",
      *                  "price": 4449000, 
      *                  "description": "Pencucian optimal untuk kain dengan 6 Motion DD (Pilih program mencuci, dan teknologi 6 Motion Direct Drive akan menggerakkan tabung cuci ke beberapa arah, membersihkan kain dan menjadikan pakaian super bersih.)", 
      *                  "category": "Mesin Cuci", 
@@ -226,7 +226,7 @@ class TechController extends Controller
         return $tech;
     }
 
-    /** 
+    /**
      * @OA\Put(
      *      path="/api/tech/{id}",
      *      tags={"HomeTech"},
@@ -234,23 +234,23 @@ class TechController extends Controller
      *      operationId="update",
      *      @OA\Response(
      *          response=404,
-     *          description="item not found",
+     *          description="Item not found",
      *          @OA\JsonContent()
      *      ),
      *      @OA\Response(
      *          response=400,
-     *          description="invalid input",
+     *          description="Invalid input",
      *          @OA\JsonContent()
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="successful",
+     *          description="Successful",
      *          @OA\JsonContent()
      *      ),
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
-     *          description="ID item that needs to be updated",
+     *          description="ID of item that needs to be updated",
      *          required=true,
      *          @OA\Schema(
      *              type="integer",
@@ -262,7 +262,8 @@ class TechController extends Controller
      *          description="Request body description",
      *          @OA\JsonContent(
      *              ref="#/components/schemas/Tech",
-     *              example={ 
+     *          example={ 
+     *                  "name": "LG Mesin Cuci FM1208N3W",
      *                  "title": "Mesin Cuci LG Front Loading 8kg, Inverter Direct Drive™ dengan Smart Diagnosis™", 
      *                  "cover": "https://www.lg.com/content/dam/channel/wcms/id/images/mesin-cuci/fm1208n3w_abwpein_eain_id_c/FM1208N3W_Mesin_Cuci_Front_Loading_thumbnail_450.jpg", 
      *                  "price": 4449000, 
@@ -270,50 +271,50 @@ class TechController extends Controller
      *                  "category": "Mesin Cuci", 
      *                  "brand": "LG", 
      *                  "model": "FM1208N3W"}                     
-     *          ),
+     *          )
      *      ),
-     *      security={{"passport_token_ready":{}, "passport":{}}}
+     *     security={{"passport_token_ready":{},"passport":{}}}
      * )
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         $tech = Tech::find($id);
-        if (!$tech) {
-            throw new HttpException(404, "item not found");
+        if(!$tech) {
+            throw new HttpException (404, 'Item not found');
         }
 
         try {
-            $validator = Validator::make($request->all(), [
-                'title' => 'required||unique:tech',
-                'brand' => 'required|mac:100',
+            $validator = Validator:: make($request->all(), [
+                'name' => 'required',
+                'type' => 'required',
             ]);
             if ($validator->fails()) {
-                throw new HttpException(400, $validator->messages()->first());
+                throw new HttpException (400, $validator->messages()->first());
             }
-           $tech->fill($request->all())->save();
-           return response()->json(array('message'=> 'Updated successfuly'), 200);
+            $tech->fill($request->all())->save();
+            return response()->json(array('message' => 'Updated successfully'), 200);
 
         } catch(\Exception $exception) {
-            throw new HttpException(400, "Invalid data : {$exception->getMessage}");
+            throw new HttpException(400, "Invalid data: {$exception->getMessage()}");
         }
     }
     /**
      * @OA\Delete(
-     *     path="/api/tech/{id}",
-     *     tags={"HomeTech"},
-     *     summary="Remove the specified item",
-     *     operationId="destroy",
+     *      path="/api/tech/{id}",
+     *      tags={"HomeTech"},
+     *      summary="Remove the specified item",
+     *      operationId="destroy",
      *      @OA\Response(
      *          response=404,
-     *          description="item not found",
+     *          description="Item not found",
      *          @OA\JsonContent()
      *      ),
-     *       @OA\Response(
+     *      @OA\Response(
      *          response=400,
-     *          description="invalid input",
+     *          description="Invalid input",
      *          @OA\JsonContent()
      *      ),
-     *       @OA\Response(
+     *      @OA\Response(
      *          response=200,
      *          description="Successful",
      *          @OA\JsonContent()
@@ -321,29 +322,29 @@ class TechController extends Controller
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
-     *          description="ID item that needs to be removed",
+     *          description="ID of item that needs to be removed",
      *          required=true,
      *          @OA\Schema(
      *              type="integer",
      *              format="int64"
      *          )
      *      ),
-     *      security={{"passport_token_ready":{}, "passport":{}}}
+     *     security={{"passport_token_ready":{},"passport":{}}}
      * )
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $tech = Tech::find($id);
-        if(!$tech){
-            throw new HttpException(404, 'item not found');
+        if(!$tech) {
+            throw new HttpException (404, 'Item not found');
         }
-
+    
         try {
             $tech->delete();
-            return response()->json(array('message'=>'Deleted successfully'), 200);
-            
-        } catch(\Exception $Exception) {
-            throw new HttpException(400, "Invalid data : {$Exception->getMessage()}");
+            return response()->json(array('message' => 'Deleted successfully'), 200);
+
+        } catch(\Exception $exception) {
+            throw new HttpException(400, "Invalid data: {$exception->getMessage()}");
         }
     }
 }

@@ -183,9 +183,9 @@
                         }
                     },
                     {
-                        "name": "_publisher",
+                        "name": "_brand",
                         "in": "query",
-                        "description": "search by publisher like name",
+                        "description": "search by brand like name",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -198,7 +198,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "latest"
+                            "example": "title_asc"
                         }
                     }
                 ],
@@ -321,7 +321,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID item that needs to be updated",
+                        "description": "ID of item that needs to be updated",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -338,6 +338,7 @@
                                 "$ref": "#/components/schemas/Tech"
                             },
                             "example": {
+                                "name": "LG Mesin Cuci FM1208N3W",
                                 "title": "Mesin Cuci LG Front Loading 8kg, Inverter Direct Drive™ dengan Smart Diagnosis™",
                                 "cover": "https://www.lg.com/content/dam/channel/wcms/id/images/mesin-cuci/fm1208n3w_abwpein_eain_id_c/FM1208N3W_Mesin_Cuci_Front_Loading_thumbnail_450.jpg",
                                 "price": 4449000,
@@ -351,7 +352,7 @@
                 },
                 "responses": {
                     "404": {
-                        "description": "item not found",
+                        "description": "Item not found",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -359,7 +360,7 @@
                         }
                     },
                     "400": {
-                        "description": "invalid input",
+                        "description": "Invalid input",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -367,7 +368,7 @@
                         }
                     },
                     "200": {
-                        "description": "successful",
+                        "description": "Successful",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -392,7 +393,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID item that needs to be removed",
+                        "description": "ID of item that needs to be removed",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -402,7 +403,7 @@
                 ],
                 "responses": {
                     "404": {
-                        "description": "item not found",
+                        "description": "Item not found",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -410,7 +411,7 @@
                         }
                     },
                     "400": {
-                        "description": "invalid input",
+                        "description": "Invalid input",
                         "content": {
                             "application/json": {
                                 "schema": {}

@@ -7,7 +7,7 @@ function getDataOnEnter(event) {
     }
 }
 
-function getData(toPage=1) {
+function getData(toPage = 1) {
     let url = baseUrl + '/api/tech';
     if (toPage) {
         $('[name="_page"]').val(toPage);
@@ -20,7 +20,7 @@ function getData(toPage=1) {
         payload[$(this).attr('name')] = $(this).val();
     });
 
-    axios.get(url,{params:payload},apiHeaders)
+    axios.get(url, { params: payload }, apiHeaders)
         .then(function (response) {
             console.log('[DATA] response..', response.data);
             let template = ``;
@@ -46,7 +46,7 @@ function getData(toPage=1) {
                                 <h6 class="product-title">
                                     <a href="/tech/`+item.id+`">`+item.title+`</a>
                                 </h6>
-                                <small class="text-color-primary">`+item.author+`</small>
+                                <small class="text-color-primary">`+item.brand+`</small>
                                 <div class="product-price">
                                     <span class="new-price">IDR `+parseFloat(item.price).toLocaleString()+`</span>
                                 </div>
@@ -61,8 +61,8 @@ function getData(toPage=1) {
             $('#products_count_end').html(response.data.products_count_end);
             $('#products_count_total').html(response.data.products_count_total);
             template = '';
-            let max_page = Math.ceil(response.data.products_count_total/response.data.filter._limit);
-            if (response.data.filter.page != 1) {
+            let max_page = Math.ceil(response.data.products_count_total / response.data.filter._limit);
+            if (response.data.filter._page != 1) {
                 template +=`
                 <li>
                     <a class="prev page-numbers" onclick="getData(1)">

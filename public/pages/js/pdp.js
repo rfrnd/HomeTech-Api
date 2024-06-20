@@ -17,13 +17,13 @@ function getDataByWindowUrlKey(){
       $('#product-publisher').html('First Published '+response.data.publication_year+' by '+response.data.publisher);
   
         // review
-        let stars = randomIntFromInterval(0,1);
+        let stars = randomIntFromInterval(3,5);
         template = '';
         for (let index = 0; index < 5; index++) {
           template += '<i class="'+(index<stars?'yellow':'')+' icon_star"></i>';
         }
         $('#product-review-stars').html(template);
-        $('#product-review-body-count').html(randomIntFromInterval(1,1000)+' customer review');
+        $('#product-review-body-count').html(randomIntFromInterval(700,1000)+' customer review');
         // status stock
         let statusStock = randomIntFromInterval(0,1);
         $('#product-status-stock').addClass(statusStock?'in-stock':'out-of-stock');

@@ -10,7 +10,7 @@
                 <div class="col-lg-3 col-md-3 order-md-1 order-2  small-mt__40">
                     <div class="shop-widget widget-shop-publishers mt-3">
                         <div class="product-filter">
-                            <h6 class="mb-20">brand</h6>
+                            <h6 class="mb-20">Brand</h6>
                             <select class="_filter form-select form-select-sm" name="_brand" onchange="getData()">
                                 <option value="" selected>All</option>
                                 <option value="LG">LG</option>
@@ -75,7 +75,6 @@
                                     <select class="_filter form-select form-select-sm" name="_sort_by" onchange="getData()">
                                         <option value="title_asc">Sort by A-Z</option>
                                         <option value="title_desc">Sort by Z-A</option>
-                                        <option value="latest_publication">Sort by latest</option>
                                         <option value="latest_added">Sort by time added</option>
                                         <option value="price_asc">Sort by price: low to high</option>
                                         <option value="price_desc">Sort by price: high to low</option>

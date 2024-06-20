@@ -1,11 +1,10 @@
-let id_el_list = "#product-preview"
+let id_el_list = "#product-preview";
 
 function getData(){
     let url = baseUrl+'/api/tech';
     let payload = {
         '_limit': 3,
         '_page': 1,
-        '_sort_by': 'latest_published'
     };
 
     axios.get(url,{params:payload},apiHeaders)
@@ -60,7 +59,7 @@ function getData(){
             ]
         });
     })
-    .catch(function(error){
+    .catch(function (error) {
         console.log('[ERROR] response..',error);
         Swal.fire({
             icon: 'error',
